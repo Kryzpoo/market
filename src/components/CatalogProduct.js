@@ -20,7 +20,6 @@ class CatalogProduct extends Component {
                 className={"product" + (this.state.hovered ? " btn-hovered" : "")}
                 onMouseEnter={this.onBtnMouseEnter}
                 onMouseLeave={this.onBtnMouseLeave}
-
             >
                 <img className="product-img"
                      src="http://localhost:3000/test-data/product1.jpg"

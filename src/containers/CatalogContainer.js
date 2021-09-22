@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Catalog from '../components/Catalog'
-import { handleGetCatalog } from '../actions/CatalogActions'
+import { handleGetCatalog } from '../redux/actions/CatalogActions'
 
 class CatalogContainer extends React.Component {
     render() {
