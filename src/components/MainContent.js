@@ -1,15 +1,15 @@
-import {Component} from "react";
-import CategoriesContainer from "../containers/CategoriesContainer"
-import CatalogContainer from "../containers/CatalogContainer";
+import {Component} from "react"
+import ShowcaseContainer from "../containers/ShowcaseContainer"
 
 const contentType = {
     catalog: 1,
     product: 2,
+    products: 1,
 }
 
 class MainContent extends Component {
     state = {
-        curContentType: contentType.catalog
+        curContentType: contentType.products
     }
 
     setContentPage = () => {
@@ -20,15 +20,14 @@ class MainContent extends Component {
     render() {
         const {curContentType} = this.state
         let contentPage
-        if (curContentType === contentType.catalog) {
-            contentPage = <CatalogContainer />
+        if (curContentType === contentType.products) {
+            contentPage = <ShowcaseContainer />
         } else if (curContentType === contentType.product) {
             //contentPage =
         }
 
         return (
             <div className={'main-content'}>
-                <CategoriesContainer />
                 {contentPage}
             </div>
         );

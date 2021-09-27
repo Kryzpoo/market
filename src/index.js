@@ -5,11 +5,17 @@ import App from './components/App';
 import store from './store/configureStore'
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import {Router} from "react-router-dom";
+import {createBrowserHistory} from "history";
+
+const history = createBrowserHistory()
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+    <Router history={history}>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </Router>,
   document.getElementById('root')
 );
 

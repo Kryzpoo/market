@@ -5,13 +5,12 @@ import { handleGetCategories } from '../redux/actions/CategoriesActions'
 
 class CategoriesContainer extends React.Component {
     render() {
-        const { data, getCategories } = this.props
+        const { categories, getCategories, changeCategory } = this.props
         return (
             <Categories
-                isLoading={data.isLoading}
-                categories={data.categories}
-                message={data.message}
+                data={categories}
                 handleGetCategories={getCategories}
+                changeCategory={changeCategory}
             />
         )
     }
@@ -19,7 +18,7 @@ class CategoriesContainer extends React.Component {
 
 const mapStateToProps = store => {
     return {
-        data: store.categories,
+        categories: store.categories,
     }
 }
 

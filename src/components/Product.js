@@ -1,6 +1,6 @@
 import {Component} from "react";
 
-class CatalogProduct extends Component {
+class Product extends Component {
     state = {
         hovered: false
     }
@@ -32,4 +32,4 @@ class CatalogProduct extends Component {
     }
 }
 
-export default CatalogProduct
+export default Product

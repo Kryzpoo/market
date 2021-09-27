@@ -1,38 +1,27 @@
-import {Component} from "react";
-import CatalogProduct from "./CatalogProduct"
+import React, {Component} from "react";
+import Product from "./Product";
 import Pagination from "./Pagination";
 
 const ELEMENTS_PER_PAGE = 20
 
-class Catalog extends Component {
-    state = {
-        pageNum: 1
-    }
-
-    componentDidMount() {
-        this.props.handleGetCatalog()
-    }
-
-    onPageClick = (pageNum) => {
-        this.setState({pageNum: pageNum})
-    }
-
+class Products extends Component {
     render() {
-        const {isLoading, productsCount, message, products} = this.props
+        const {page, onPageClick, data} = this.props
+        const {productsCount, products, isLoading, message} = data
 
         if (message) {
             console.error(message)
-            return <p>При загрузке каталога произошла ошибка</p>
+            return <p>При загрузке списка товаров произошла ошибка</p>
         }
 
         if (isLoading) {
-            return <p>Загрузка каталога...</p>
+            return <div className={'loader'}>Загрузка списка товаров...</div>
         }
 
-        const [start, end] = Pagination.getElementIndexes(this.state.pageNum, ELEMENTS_PER_PAGE)
+        const [start, end] = Pagination.getElementIndexes(page, ELEMENTS_PER_PAGE)
         const productElements = products.slice(start, end).map(data => {
                 return (
-                    <CatalogProduct
+                    <Product
                         key={data.id}
                         name={data.name}
                         price={data.price}
@@ -48,11 +37,11 @@ class Catalog extends Component {
                 <Pagination
                     elementsPerPage={ELEMENTS_PER_PAGE}
                     elementsCount={productsCount}
-                    onPageClick={this.onPageClick}
+                    onPageClick={onPageClick}
                 />
             </div>
         )
     }
 }
 
-export default Catalog
+export default Products

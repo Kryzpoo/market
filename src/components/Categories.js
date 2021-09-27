@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import Category from "./Category"
 
 class Categories extends Component {
@@ -7,20 +7,25 @@ class Categories extends Component {
     }
 
     render() {
-        const {isLoading, message, categories} = this.props
-        if (isLoading)
-            return <p>Загрузка...</p>
+        const {data, changeCategory} = this.props
+        const {categories, isLoading, message} = data
 
         if (message) {
             console.error(message)
-            return <p>При загрузке категорий произошла ошибка</p>
+            return <p>При загрузке списка категорий произошла ошибка</p>
+        }
+
+        if (isLoading) {
+            return <div className={'loader'}>Загрузка категорий...</div>
         }
 
         let categoryElements = categories.map(data => {
             return (
                 <Category
+                    id={data.id}
                     key={data.id}
                     name={data.name}
+                    changeCategory={changeCategory}
                 />)
         })
 

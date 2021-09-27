@@ -2,7 +2,7 @@ import {
     CATALOG_REQUEST,
     CATALOG_SUCCESS,
     CATALOG_FAIL,
-} from '../actions/CatalogActions'
+} from '../actions/ProductsActions'
 
 const initialState = {
     isLoading: false,
@@ -11,7 +11,7 @@ const initialState = {
     message: ''
 }
 
-export function catalogReducer(state = initialState, action) {
+export function productsReducer(state = initialState, action) {
     switch (action.type) {
         case CATALOG_REQUEST:
             return {

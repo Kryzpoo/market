@@ -1,25 +1,22 @@
 import {Component} from "react";
 
 class Pagination extends Component {
-    state = {
-        pagesCount: 0,
-    }
-
     static getElementIndexes = (pageNum, elementsPerPage) => {
         const start = ((pageNum - 1) * elementsPerPage)
         const end = pageNum * elementsPerPage
         return [start, end]
     }
 
-    componentDidMount() {
+    getPagesCount = () => {
         const {elementsCount, elementsPerPage} = this.props
-        const pagesCount = Math.ceil(elementsCount / elementsPerPage)
-        this.setState({pagesCount: pagesCount})
+        return Math.ceil(elementsCount / elementsPerPage)
     }
 
     render() {
+        const pagesCount = this.getPagesCount()
         const pageElements = [];
-        for (let i = 1; i <= this.state.pagesCount; i++) {
+
+        for (let i = 1; i <= pagesCount; i++) {
             pageElements.push(
                 <PaginationButton
                     key={i}
@@ -27,11 +24,10 @@ class Pagination extends Component {
                     onPageClick={this.props.onPageClick}
                 />)
         }
-        return (
-            <div className="pagination-block">
-                {pageElements}
-            </div>
-        )
+
+        return pagesCount > 1 ?
+            <div className="pagination-block">{pageElements}</div>
+            : null
     }
 }
 

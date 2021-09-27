@@ -13,9 +13,14 @@ class Category extends Component {
         this.setState({hovered: false})
     }
 
+    onClick = () => {
+        this.props.changeCategory(this.props.id)
+    }
+
     render() {
         return <div
             className={"category" + (this.state.hovered ? " btn-hovered" : "")}
+            onClick={this.onClick}
             onMouseEnter={this.onBtnMouseEnter}
             onMouseLeave={this.onBtnMouseLeave}
         >

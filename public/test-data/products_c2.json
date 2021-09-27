@@ -1,0 +1,7 @@
+{
+  "count": 2,
+  "data": [
+    {"id": 1, "name": "Товар 1", "price": 10, "pic_link": "product1.jpg"},
+    {"id": 2, "name": "Товар 2", "price": 20, "pic_link": "product1.jpg"}
+  ]
+}
