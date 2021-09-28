@@ -1,4 +1,5 @@
 import {Component} from "react";
+import {withRouter} from "react-router-dom";
 
 class Category extends Component {
     state = {
@@ -18,6 +19,7 @@ class Category extends Component {
     }
 
     render() {
+        console.log(this.props)
         return <div
             className={"category" + (this.state.hovered ? " btn-hovered" : "")}
             onClick={this.onClick}
@@ -29,4 +31,4 @@ class Category extends Component {
     }
 }
 
-export default Category
+export default withRouter(Category)

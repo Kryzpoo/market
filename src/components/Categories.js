@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Category from "./Category"
+import {BrowserRouter, Link, Route} from "react-router-dom";
 
 class Categories extends Component {
     componentDidMount() {
@@ -21,18 +22,22 @@ class Categories extends Component {
 
         let categoryElements = categories.map(data => {
             return (
-                <Category
-                    id={data.id}
-                    key={data.id}
-                    name={data.name}
-                    changeCategory={changeCategory}
-                />)
+                <Link to={`/products?category=${data.id}`} key={data.id}>
+                    <Category
+                        id={data.id}
+                        name={data.name}
+                        changeCategory={changeCategory}
+                    />
+                </Link>)
         })
 
         return (
-            <div className={'categories'}>
-                {categoryElements}
-            </div>
+            <BrowserRouter>
+                <div className={'categories'}>
+                    {categoryElements}
+                </div>
+                <Route path={'/products?category=:categoryId'} component={Category}/>
+            </BrowserRouter>
         )
     }
 }

@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import Products from '../components/Products'
 import {handleGetProducts} from '../redux/actions/ProductsActions'
