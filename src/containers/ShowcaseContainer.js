@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import { handleGetProducts } from '../redux/actions/ProductsActions';
+import {handleGetProducts} from '../redux/actions/ProductsActions';
 import {connect} from "react-redux";
 import CategoriesContainer from "./CategoriesContainer";
 import ProductsContainer from "./ProductsContainer";

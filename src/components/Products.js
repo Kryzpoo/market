@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Product from "./Product";
 import Pagination from "./Pagination";
+import {tryRenderUnsuccessfully} from "../utils/utils";
 
 const ELEMENTS_PER_PAGE = 20
 
@@ -9,14 +10,7 @@ class Products extends Component {
         const {page, onPageClick, data} = this.props
         const {productsCount, products, isLoading, message} = data
 
-        if (message) {
-            console.error(message)
-            return <p>При загрузке списка товаров произошла ошибка</p>
-        }
-
-        if (isLoading) {
-            return <div className={'loader'}>Загрузка списка товаров...</div>
-        }
+        tryRenderUnsuccessfully(isLoading, message)
 
         const [start, end] = Pagination.getElementIndexes(page, ELEMENTS_PER_PAGE)
         const productElements = products.slice(start, end).map(data => {

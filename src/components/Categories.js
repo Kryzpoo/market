@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Category from "./Category"
 import {BrowserRouter, Link, Route} from "react-router-dom";
+import {tryRenderUnsuccessfully} from "../utils/utils";
 
 class Categories extends Component {
     componentDidMount() {
@@ -11,14 +12,7 @@ class Categories extends Component {
         const {data, changeCategory} = this.props
         const {categories, isLoading, message} = data
 
-        if (message) {
-            console.error(message)
-            return <p>При загрузке списка категорий произошла ошибка</p>
-        }
-
-        if (isLoading) {
-            return <div className={'loader'}>Загрузка категорий...</div>
-        }
+        tryRenderUnsuccessfully(isLoading, message)
 
         let categoryElements = categories.map(data => {
             return (

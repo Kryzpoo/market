@@ -5,12 +5,12 @@ import {handleGetProducts} from '../redux/actions/ProductsActions'
 
 class ProductsContainer extends React.Component {
     render() {
-        const { products, getCatalog, onPageClick, page } = this.props
+        const { products, handleGetProducts, onPageClick, page } = this.props
 
         return (
             <Products
                 data={products}
-                handleGetProducts={getCatalog}
+                handleGetProducts={handleGetProducts}
                 onPageClick={onPageClick}
                 page={page}
             />
@@ -26,7 +26,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getCatalog: () => dispatch(handleGetProducts()),
+        handleGetProducts: () => dispatch(handleGetProducts()),
     }
 }
 
