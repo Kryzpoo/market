@@ -18,16 +18,13 @@ class Pagination extends Component {
         const pageElements = [];
         const {location} = this.props
 
-        console.log(location)
-
         for (let i = 1; i <= pagesCount; i++) {
             pageElements.push(
-                <Link to={`${location.pathname}${location.search}page=${i}`} key={i}>
                     <PaginationButton
+                        key={i}
                         value={i}
                         onPageClick={this.props.onPageClick}
                     />
-                </Link>
             )
         }
 

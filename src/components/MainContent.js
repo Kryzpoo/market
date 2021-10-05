@@ -1,10 +1,12 @@
 import {Component} from "react"
 import ShowcaseContainer from "../containers/ShowcaseContainer"
+import {Route} from "react-router-dom";
+import {Switch} from "react-router";
 
 const contentType = {
     catalog: 1,
     product: 2,
-    products: 1,
+    products: 3,
 }
 
 class MainContent extends Component {
@@ -14,14 +16,25 @@ class MainContent extends Component {
 
     setContentPage = () => {
         let {productId} = this.props
-        console.log(productId)
     }
 
     render() {
         const {curContentType} = this.state
         let contentPage
         if (curContentType === contentType.products) {
-            contentPage = <ShowcaseContainer />
+            contentPage = (
+                <Switch>
+                    <Route
+                        path={['/categories/:categoryId']}
+                        component={ShowcaseContainer}
+                    />
+                    <Route
+                        path='/'
+                        component={ShowcaseContainer}
+                    />
+                </Switch>
+
+            )
         } else if (curContentType === contentType.product) {
             //contentPage =
         }

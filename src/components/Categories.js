@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import Category from "./Category"
-import {BrowserRouter, Link, Route} from "react-router-dom";
 import {tryRenderUnsuccessfully} from "../utils/utils";
 
 class Categories extends Component {
@@ -16,22 +15,19 @@ class Categories extends Component {
 
         let categoryElements = categories.map(data => {
             return (
-                <Link to={`/products?category=${data.id}`} key={data.id}>
-                    <Category
-                        id={data.id}
-                        name={data.name}
-                        changeCategory={changeCategory}
-                    />
-                </Link>)
+                <Category
+                    key={data.id}
+                    id={data.id}
+                    name={data.name}
+                    changeCategory={changeCategory}
+                />
+            )
         })
 
         return (
-            <BrowserRouter>
-                <div className={'categories'}>
-                    {categoryElements}
-                </div>
-                <Route path={'/products?category=:categoryId'} component={Category}/>
-            </BrowserRouter>
+            <div className={'categories'}>
+                {categoryElements}
+            </div>
         )
     }
 }

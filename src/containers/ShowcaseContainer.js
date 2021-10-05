@@ -3,22 +3,22 @@ import {handleGetProducts} from '../redux/actions/ProductsActions';
 import {connect} from "react-redux";
 import CategoriesContainer from "./CategoriesContainer";
 import ProductsContainer from "./ProductsContainer";
+import {withRouter} from "react-router-dom";
 
 class ShowcaseContainer extends Component {
     state = {
         isLoading: true,
-        currentCategory: null,
         products: [],
         message: '',
         page: 1
     }
 
     componentDidMount() {
-        this.props.handleGetProducts(this.state.currentCategory)
+        this.props.handleGetProducts(this.getCategory())
     }
 
     changeCategory = (category) => {
-        this.setState({currentCategory: category, page: 1})
+        this.setState({page: 1})
         this.props.handleGetProducts(category)
     }
 
@@ -26,8 +26,15 @@ class ShowcaseContainer extends Component {
         this.setState({page: num})
     }
 
+    getCategory = () => {
+        return this.props.match.params.categoryId
+    }
+
     render() {
-        const {page, currentCategory} = this.state
+        const {page} = this.state
+
+        const urlParams = new URLSearchParams(this.props.location.search)
+
         return (
             <Fragment>
                 <CategoriesContainer
@@ -35,17 +42,10 @@ class ShowcaseContainer extends Component {
                 />
                 <ProductsContainer
                     onPageClick={this.onPageClick}
-                    category={currentCategory}
                     page={page}
                 />
             </Fragment>
         )
-    }
-}
-
-const mapStateToProps = store => {
-    return {
-        productsData: store.products,
     }
 }
 
@@ -56,6 +56,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
-)(ShowcaseContainer)
+)(withRouter(ShowcaseContainer))

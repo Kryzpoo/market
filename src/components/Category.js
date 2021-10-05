@@ -1,5 +1,5 @@
-import {Component} from "react";
-import {withRouter} from "react-router-dom";
+import React, {Component} from "react";
+import {Link, withRouter} from "react-router-dom";
 
 class Category extends Component {
     state = {
@@ -19,15 +19,20 @@ class Category extends Component {
     }
 
     render() {
-        console.log(this.props)
-        return <div
-            className={"category" + (this.state.hovered ? " btn-hovered" : "")}
-            onClick={this.onClick}
-            onMouseEnter={this.onBtnMouseEnter}
-            onMouseLeave={this.onBtnMouseLeave}
-        >
-            {this.props.name}
-        </div>
+        const {id, name} = this.props
+
+        return (
+            <Link to={`/categories/${id}`}>
+                <div
+                    className={"category" + (this.state.hovered ? " btn-hovered" : "")}
+                    onClick={this.onClick}
+                    onMouseEnter={this.onBtnMouseEnter}
+                    onMouseLeave={this.onBtnMouseLeave}
+                >
+                {name}
+                </div>
+            </Link>
+        )
     }
 }
 

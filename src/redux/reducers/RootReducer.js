@@ -1,8 +1,12 @@
-import { combineReducers } from 'redux'
-import { productsReducer } from './ProductsReducer'
-import { categoriesReducer } from './CategoriesReducer'
+import {combineReducers} from 'redux'
+import {connectRouter} from 'connected-react-router'
+import {productsReducer} from './ProductsReducer'
+import {categoriesReducer} from './CategoriesReducer'
 
-export const rootReducer = combineReducers({
+const createRootReducer = (history) => combineReducers({
+    router: connectRouter(history),
     products: productsReducer,
     categories: categoriesReducer,
 })
+
+export {createRootReducer}
