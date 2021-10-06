@@ -10,15 +10,18 @@ class ShowcaseContainer extends Component {
         isLoading: true,
         products: [],
         message: '',
-        page: 1
+        category: null,
+        page: 1,
     }
 
     componentDidMount() {
-        this.props.handleGetProducts(this.getCategory())
+        const category = this.getCategory()
+        this.setState({category: category})
+        this.props.handleGetProducts(category)
     }
 
     changeCategory = (category) => {
-        this.setState({page: 1})
+        this.setState({category: category, page: 1})
         this.props.handleGetProducts(category)
     }
 
@@ -26,14 +29,22 @@ class ShowcaseContainer extends Component {
         this.setState({page: num})
     }
 
-    getCategory = () => {
-        return this.props.match.params.categoryId
+    getCategory = (props= null) => {
+        props = props || this.props
+        return new URLSearchParams(props.location.search).get('category')
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        const newCategory = this.getCategory(nextProps)
+        if (this.getCategory() !== newCategory) {
+            this.setState({category: newCategory})
+            this.props.handleGetProducts(newCategory)
+        }
+        return this.props !== nextProps;
     }
 
     render() {
         const {page} = this.state
-
-        const urlParams = new URLSearchParams(this.props.location.search)
 
         return (
             <Fragment>

@@ -25,11 +25,7 @@ class MainContent extends Component {
             contentPage = (
                 <Switch>
                     <Route
-                        path={['/categories/:categoryId']}
-                        component={ShowcaseContainer}
-                    />
-                    <Route
-                        path='/'
+                        path={['/catalog', '/']}
                         component={ShowcaseContainer}
                     />
                 </Switch>
