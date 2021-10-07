@@ -5,11 +5,11 @@ import { handleGetCategories } from '../redux/actions/CategoriesActions'
 
 class CategoriesContainer extends React.Component {
     render() {
-        const { categories, getCategories, changeCategory } = this.props
+        const {data, changeCategory, handleGetCategories} = this.props
         return (
             <Categories
-                data={categories}
-                handleGetCategories={getCategories}
+                data={data}
+                handleGetCategories={handleGetCategories}
                 changeCategory={changeCategory}
             />
         )
@@ -18,13 +18,13 @@ class CategoriesContainer extends React.Component {
 
 const mapStateToProps = store => {
     return {
-        categories: store.categories,
+        data: store.categories,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getCategories: () => dispatch(handleGetCategories()),
+        handleGetCategories: () => dispatch(handleGetCategories()),
     }
 }
 

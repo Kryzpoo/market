@@ -1,18 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Products from '../components/Products'
-import {handleGetProducts} from '../redux/actions/ProductsActions'
 
 class ProductsContainer extends React.Component {
     render() {
-        const { products, handleGetProducts, onPageClick, page } = this.props
+        const {data, onPageClick} = this.props
 
         return (
             <Products
-                data={products}
-                handleGetProducts={handleGetProducts}
+                data={data}
                 onPageClick={onPageClick}
-                page={page}
             />
         )
     }
@@ -20,17 +17,10 @@ class ProductsContainer extends React.Component {
 
 const mapStateToProps = store => {
     return {
-        products: store.products,
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        handleGetProducts: () => dispatch(handleGetProducts()),
+        data: store.products,
     }
 }
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(ProductsContainer)

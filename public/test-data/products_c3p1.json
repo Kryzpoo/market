@@ -1,5 +1,5 @@
 {
-  "count": 21,
+  "count": 42,
   "data": [
     {"id": 1, "name": "Товар 1", "price": 10, "pic_link": "product1.jpg"},
     {"id": 2, "name": "Товар 2", "price": 20, "pic_link": "product1.jpg"},
@@ -20,7 +20,6 @@
     {"id": 17, "name": "Товар 17", "price": 70, "pic_link": "product1.jpg"},
     {"id": 18, "name": "Товар 18", "price": 80, "pic_link": "product1.jpg"},
     {"id": 19, "name": "Товар 19", "price": 90, "pic_link": "product1.jpg"},
-    {"id": 20, "name": "Товар 20", "price": 100, "pic_link": "product1.jpg"},
-    {"id": 21, "name": "Товар 21", "price": 10, "pic_link": "product1.jpg"}
+    {"id": 20, "name": "Товар 20", "price": 100, "pic_link": "product1.jpg"}
   ]
 }

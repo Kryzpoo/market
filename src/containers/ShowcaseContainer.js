@@ -4,48 +4,49 @@ import {connect} from "react-redux";
 import CategoriesContainer from "./CategoriesContainer";
 import ProductsContainer from "./ProductsContainer";
 import {withRouter} from "react-router-dom";
+import {getQueryParams} from "../utils/utils";
 
 class ShowcaseContainer extends Component {
     state = {
         isLoading: true,
         products: [],
         message: '',
-        category: null,
-        page: 1,
+        params: {
+            category: null,
+            page: 1,
+        }
     }
 
     componentDidMount() {
-        const category = this.getCategory()
-        this.setState({category: category})
-        this.props.handleGetProducts(category)
+        const params = getQueryParams(this.props)
+        if (Object.keys(params).length > 0) {
+            this.setState({params: params})
+        }
+        this.props.handleGetProducts(params)
     }
 
     changeCategory = (category) => {
-        this.setState({category: category, page: 1})
-        this.props.handleGetProducts(category)
+        const newParams = {category: category, page: 1}
+        this.setState({params: newParams})
+        this.props.handleGetProducts(newParams)
     }
 
-    onPageClick = (num) => {
-        this.setState({page: num})
-    }
-
-    getCategory = (props= null) => {
-        props = props || this.props
-        return new URLSearchParams(props.location.search).get('category')
+    onPageClick = (page) => {
+        const newParams = {category: this.state.params.category, page: page}
+        this.setState({params: newParams})
+        this.props.handleGetProducts(newParams)
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        const newCategory = this.getCategory(nextProps)
-        if (this.getCategory() !== newCategory) {
-            this.setState({category: newCategory})
-            this.props.handleGetProducts(newCategory)
+        const newParams = getQueryParams(nextProps)
+        if (JSON.stringify(this.state.params) !== JSON.stringify(newParams)) {
+            this.setState({params: newParams})
+            this.props.handleGetProducts(newParams)
         }
-        return this.props !== nextProps;
+        return true;
     }
 
     render() {
-        const {page} = this.state
-
         return (
             <Fragment>
                 <CategoriesContainer
@@ -53,7 +54,7 @@ class ShowcaseContainer extends Component {
                 />
                 <ProductsContainer
                     onPageClick={this.onPageClick}
-                    page={page}
+                    page={this.state.params.page}
                 />
             </Fragment>
         )
@@ -62,7 +63,7 @@ class ShowcaseContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleGetProducts: (category) => dispatch(handleGetProducts(category)),
+        handleGetProducts: (params) => dispatch(handleGetProducts(params)),
     }
 }
 

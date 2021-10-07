@@ -1,4 +1,6 @@
 import {Component} from "react";
+import {Link, withRouter} from "react-router-dom";
+import {getQueryParams} from "../utils/utils";
 
 class Pagination extends Component {
     static getElementIndexes = (pageNum, elementsPerPage) => {
@@ -14,15 +16,22 @@ class Pagination extends Component {
 
     render() {
         const pagesCount = this.getPagesCount()
-        const pageElements = [];
+        const {pathname} = this.props.location
+        const params = getQueryParams(this.props)
 
+        const pageElements = [];
         for (let i = 1; i <= pagesCount; i++) {
+            params['page'] = i
             pageElements.push(
+                <Link
+                    to={`${pathname}?${new URLSearchParams(params).toString()}`}
+                    key={i}
+                >
                     <PaginationButton
-                        key={i}
                         value={i}
                         onPageClick={this.props.onPageClick}
                     />
+                </Link>
             )
         }
 
@@ -64,4 +73,4 @@ class PaginationButton extends Component {
     }
 }
 
-export default Pagination
+export default withRouter(Pagination)

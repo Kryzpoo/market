@@ -22,7 +22,7 @@ class Category extends Component {
         const {id, name} = this.props
 
         return (
-            <Link to={`/catalog?category=${id}`}>
+            <Link to={`/catalog?category=${id}&page=1`}>
                 <div
                     className={"category" + (this.state.hovered ? " btn-hovered" : "")}
                     onClick={this.onClick}

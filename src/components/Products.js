@@ -7,13 +7,12 @@ const ELEMENTS_PER_PAGE = 20
 
 class Products extends Component {
     render() {
-        const {page, onPageClick, data} = this.props
+        const {onPageClick, data} = this.props
         const {productsCount, products, isLoading, message} = data
 
         tryRenderUnsuccessfully(isLoading, message)
 
-        const [start, end] = Pagination.getElementIndexes(page, ELEMENTS_PER_PAGE)
-        const productElements = products.slice(start, end).map(data => {
+        const productElements = products.map(data => {
                 return (
                     <Product
                         key={data.id}

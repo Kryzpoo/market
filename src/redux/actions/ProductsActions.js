@@ -2,15 +2,18 @@ export const CATALOG_REQUEST = 'CATALOG_REQUEST'
 export const CATALOG_SUCCESS = 'CATALOG_SUCCESS'
 export const CATALOG_FAIL = 'CATALOG_FAIL'
 
-export function handleGetProducts(category) {
+export function handleGetProducts({category = null, page = 1}) {
     return function(dispatch) {
         dispatch({
             type: CATALOG_REQUEST
         })
 
-        const url = !Boolean(category) ?
-            'http://localhost:3000/test-data/products_recommendations.json'
-            : `http://localhost:3000/test-data/products_c${category}.json`
+        let url
+        if (category) {
+            url = `http://localhost:3000/test-data/products_c${category}p${page}.json`
+        } else {
+            url = 'http://localhost:3000/test-data/products_recommendations.json'
+        }
 
         fetch(url)
             .then(response => {
@@ -23,6 +26,7 @@ export function handleGetProducts(category) {
                 })
             })
             .catch(reason => {
+                console.log('ERROR', reason)
                 dispatch({
                     type: CATALOG_FAIL,
                     payload: new Error(reason.toString())
